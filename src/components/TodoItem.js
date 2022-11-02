@@ -1,17 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import TodoItem from './TodoItem';
 
-function TodosList(props) {
-  const { todos } = props;
-  return (
-    <ul>
-      {todos.map((todo) => (<TodoItem key={todo.id} todo={todo} />))}
-    </ul>
-  );
+function TodoItem(props) {
+  const { todo } = props;
+  return (<li key={todo.id}>
+    <input type="checkbox" />
+    {todo.title}
+    </li>);
 }
-TodosList.propTypes = {
-  todos: PropTypes.arrayOf(
+TodoItem.propTypes = {
+  todo: PropTypes.arrayOf(
     PropTypes.shape({
       id: PropTypes.string,
       title: PropTypes.string,
@@ -21,4 +19,4 @@ TodosList.propTypes = {
   delTodo: PropTypes.func.isRequired,
   handleUpdate: PropTypes.func.isRequired, */
 };
-export default TodosList;
+export default TodoItem;
