@@ -1,5 +1,6 @@
 import React from 'react';
 import Header from './Header';
+import InputTodo from './InputTodo';
 import TodosList from './TodosList';
 
 //  eslint-disable-next-line
@@ -27,8 +28,38 @@ class TodoContainer extends React.Component {
     };
   }
 
-  handleChange = () => {
-    console.log("clicked");
+  addTodoItem = (title) => {
+    const newTodo = {
+      id: 4,
+      title,
+      completed: false,
+    };
+    this.setState({
+      todos: [...this.state.todos,
+        newTodo],
+    });
+  };
+
+  handleChange = (id) => {
+    const { todos } = this.state;
+    this.setState({
+      todos: todos.map((todo) => {
+        if (todo.id === id) {
+          todo.completed = !todo.completed; // eslint-disable-line no-param-reassign
+          // console.log('clicked ', todo.completed);
+        }
+        return todo;
+      }),
+    });
+  };
+
+  delTodo = (id) => {
+    const { todos } = this.state;
+    this.setState({
+      todos: [
+        ...todos.filter((todo) => todo.id !== id),
+      ],
+    });
   };
 
   render() {
@@ -36,7 +67,12 @@ class TodoContainer extends React.Component {
     return (
       <div>
         <Header />
-        <TodosList todos={todos} handleChangeProps={this.handleChange} />
+        <InputTodo addTodoProps={this.addTodoItem} />
+        <TodosList
+          todos={todos}
+          handleChangeProps={this.handleChange}
+          deleteTodoProps={this.delTodo}
+        />
       </div>
     );
   }

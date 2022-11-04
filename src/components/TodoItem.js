@@ -2,15 +2,20 @@ import React from 'react';
 import PropTypes from 'prop-types';
 
 function TodoItem(props) {
-  const { todo } = props;
-  return (<li key={todo.id}>
-    <input 
-    type="checkbox"  
-    checked={todo.completed} 
-    onChange={() => console.log('cliqued')}
-    />
-    {todo.title}
-    </li>);
+  const { todo, handler, deleteHandler } = props;
+  return (
+    <li key={todo.id}>
+      <input
+        type="checkbox"
+        checked={todo.completed}
+        onChange={() => handler(todo.id)}
+      />
+      {todo.title}
+      <button type="button" onClick={() => deleteHandler(todo.id)}>
+        Delete
+      </button>
+    </li>
+  );
 }
 TodoItem.propTypes = {
   todo: PropTypes.arrayOf(
@@ -20,8 +25,8 @@ TodoItem.propTypes = {
       completed: PropTypes.bool,
     }),
   ).isRequired,
-  /* handleChange: PropTypes.func.isRequired,
-  delTodo: PropTypes.func.isRequired,
-  handleUpdate: PropTypes.func.isRequired, */
+  handler: PropTypes.func.isRequired,
+  deleteHandler: PropTypes.func.isRequired,
+  /* handleUpdate: PropTypes.func.isRequired, */
 };
 export default TodoItem;
