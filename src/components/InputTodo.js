@@ -1,5 +1,5 @@
 import React, { Component } from 'react';
-
+import PropTypes from 'prop-types';
 //  eslint-disable-next-line
 class InputTodo extends Component {
   constructor() {
@@ -16,8 +16,13 @@ class InputTodo extends Component {
   };
 
   handleSubmit = (e) => {
+    const { title } = this.state;
+    const { addTodoProps } = this.props;
     e.preventDefault();
-    this.props.addTodoProps(this.state.title);
+    addTodoProps(title);
+    this.setState({
+      title: '',
+    });
   };
 
   render() {
@@ -36,4 +41,9 @@ class InputTodo extends Component {
     );
   }
 }
+InputTodo.propTypes = {
+  addTodoProps: PropTypes.func.isRequired,
+  /* deleteTodoProps: PropTypes.func.isRequired,
+  handleUpdate: PropTypes.func.isRequired, */
+};
 export default InputTodo;

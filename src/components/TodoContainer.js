@@ -34,8 +34,9 @@ class TodoContainer extends React.Component {
       title,
       completed: false,
     };
+    const { todos } = this.state;
     this.setState({
-      todos: [...this.state.todos,
+      todos: [...todos,
         newTodo],
     });
   };
