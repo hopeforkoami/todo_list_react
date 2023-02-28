@@ -24,6 +24,16 @@ class TodoContainer extends React.Component {
           title: 'Deploy to live server',
           completed: false,
         },
+        {
+          id: 4,
+          title: 'live responding test',
+          completed: false,
+        },
+        {
+          id: 5,
+          title: 'security pentest',
+          completed: false,
+        },
       ],
     };
   }
@@ -66,14 +76,18 @@ class TodoContainer extends React.Component {
   render() {
     const { todos } = this.state;
     return (
-      <div>
-        <Header />
-        <InputTodo addTodoProps={this.addTodoItem} />
-        <TodosList
-          todos={todos}
-          handleChangeProps={this.handleChange}
-          deleteTodoProps={this.delTodo}
-        />
+      <div className="container">
+        <div className="todolist_place_holder">
+          <Header />
+          <InputTodo addTodoProps={this.addTodoItem} />
+          <TodosList
+            todos={todos}
+            handleChangeProps={this.handleChange}
+            deleteTodoProps={this.delTodo}
+          />
+
+          <button type="button" className="todo_clear_all_completed">Clear all completed</button>
+        </div>
       </div>
     );
   }
